@@ -82,7 +82,7 @@
         </li>
         <li> <a href="about-us.html">About Us</a> </li>
         <li> <a href="services.html">Services</a> </li>
-        <li><a href="jobs.html">Current Jobs</a></li>
+        class="active"
 
         <li class="active"> <a href="contact-2.html" class="dropdown-toggle" data-toggle="dropdown">Contact Us</i></a></li>
       </ul>
@@ -105,11 +105,11 @@
       <h2 class="section-heading text-dark">Prenez contact <span>avec nous</span></h2>
       <h4>Email ou Téléphone </h4>
       <div class="konnect-space"></div>
-      <form class="konnect-form" id="contactForm">
-        <input type="text" class="form-control" id="name" placeholder="Nom et prénom" required>
-        <input type="text" class="form-control" id="phone" placeholder="Votre numéro de téléphone" required>
-        <input type="email" class="form-control" id="email" placeholder="Entrer votre email" required>
-        <textarea class="form-control" id="comment" placeholder="Description..." required></textarea>
+      <form class="konnect-form" id="contactForm" action="save_contact.php" method="post">
+        <input type="text" class="form-control" id="nom_prenom" name="nom_prenom" placeholder="Nom et prénom" required>
+        <input type="text" class="form-control" id="contact" name="contact" placeholder="Votre numéro de téléphone" required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Entrer votre email" required>
+        <textarea class="form-control" id="comment" name="description" placeholder="Description..." required></textarea>
         <button type="submit" class="konnect-submit">Envoyer</button>
       </form>
     </div>

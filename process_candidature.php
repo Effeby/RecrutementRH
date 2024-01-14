@@ -26,7 +26,8 @@ $stmt = $conn->prepare($sql);
 
 // Vérification de la préparation de la requête
 if ($stmt) {
-    $stmt->bind_param("ssssssb", $nom_poste, $nom_prenom, $contact, $email, $message, $lettre_motivation, $cv);
+    // 'b' dans bind_param est utilisé pour le type de données BLOB
+    $stmt->bind_param("sssssss", $nom_poste, $nom_prenom, $contact, $email, $message, $lettre_motivation, $cv);
 
     // Exécution de la requête
     if ($stmt->execute()) {

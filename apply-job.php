@@ -86,8 +86,7 @@ $jobTitle = isset($_GET['job_titre']) ? urldecode($_GET['job_titre']) : 'Aucun p
         </li>
         <li> <a href="about-us.html">About Us</a> </li>
         <li> <a href="services.html">Services</a> </li>
-        <li class="active"><a href="jobs.html">Current Jobs</a></li>
-        </li>
+        <li class="active"><a href="jobs.php">Offre d'emplois</a></li>
         <li><a href="contact-2.html">Contact Us</a></li>
         </li>
       </ul>

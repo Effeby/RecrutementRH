@@ -17,6 +17,7 @@
   <!-- Bootstrap Core CSS -->
   <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+
   <!-- Custom icon Fonts -->
   <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -72,7 +73,7 @@
           </li>
           <li> <a href="about-us.html">About Us</a> </li>
           <li> <a href="services.html">Services</a> </li>
-          <li class="active"><a href="jobs.html">Current Jobs</a></li>
+          <li class="active"><a href="jobs.php">Offre d'emplois</a></li>
           <li><a href="contact-2.html">Contact Us</a></li>
           </li>
         </ul>
@@ -101,52 +102,80 @@
       </div>
     </div>
     <!-- Openings table heading-->
+
+    <style>
+    .job-description {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin: 0;
+    }
+</style>
     <div class="container">
-      <div class="row">
-        <div class="job-single-header">
-          <div class="col-sm-4">Job Title</div>
-          <div class="col-sm-6">Description</div>
-          <div class="col-sm-2">Apply</div>
-        </div>
+    <div class="row">
         <!-- Current Openings List-->
         <!-- Job-->
         <div class="job-list">
 
-          <!-- intéraction avec la base de donnée -->
-          <?php
-          $conn = new mysqli("localhost", "root", "", "recrutementBD");
+            <!-- intéraction avec la base de donnée -->
+            <?php
+            $conn = new mysqli("localhost", "root", "", "recrutementBD");
 
-          if ($conn->connect_error) {
-              die("Désolé nous n'avons pas reussi à établir une connexion avec la base de donnée: " . $conn->connect_error);
-          }
-          $sql = "SELECT * FROM jobs";
-          $result = $conn->query($sql);
+            if ($conn->connect_error) {
+                die("Désolé nous n'avons pas réussi à établir une connexion avec la base de données: " . $conn->connect_error);
+            }
 
-          if ($result->num_rows > 0) {
-              for ($i = 0; $i < $result->num_rows; $i++) {
-                  $job = $result->fetch_assoc();
-                  ?>
-                  <div class="job-single">
-                      <div class="col-sm-4">
-                          <h4 class="job-title"><?= $job['titre'] ?></h4>
-                          <span class="job-date"><?= $job['date'] ?></span>
-                      </div>
-                      <div class="col-sm-6">
-                          <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?= $job['description'] ?></p>
-                      </div>
-                      <div class="col-sm-2">
-                      <a class="konnect-button-2" href="apply-job.php?job_titre=<?= urlencode($job['titre']) ?>">Apply</a>
-                      </div>
-                  </div>
-                  <?php
-              }
-          } else {
-              echo "Aucun results, pas d'emplois pour le moment.";
-          }
+            $sql = "SELECT * FROM jobs";
+            $result = $conn->query($sql);
 
-          $conn->close();
-          ?>
+            if ($result) {
+                $stmt = $conn->prepare("SELECT titre, date, description FROM jobs");
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Description</th>
+                                <th>Apply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while ($job = $result->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                    <td><p><?= $job['titre'] ?></p></td>
+                                    <td><p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?= $job['description'] ?></p></td>
+                                    <td><a class="konnect-button-2" href="apply-job.php?job_titre=<?= urlencode($job['titre']) ?>">Apply</a></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                } else {
+                    echo "Aucun résultat, pas d'emplois pour le moment.";
+                }
+
+                // Fermeture du statement
+                $stmt->close();
+            } else {
+                echo "Erreur lors de l'exécution de la requête: " . $conn->error;
+            }
+
+            $conn->close();
+            ?>
+
         </div>
+    </div>
+</div>
+
         
         <!-- Pagination -->
         <!-- <ul class="pagination">
