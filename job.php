@@ -7,6 +7,9 @@
 </head>
 <body>
     <a href="admin_dashboard.php">Retour</a>
+    <br><br>
+    <a href='add-job.php'>Ajouter</a>
+    <br><br>
     <?php
     // Connexion à la base de données (assurez-vous de remplacer les valeurs par les vôtres)
     $conn = new mysqli("localhost", "root", "", "recrutementbd");
@@ -43,7 +46,6 @@
                     <th>Date</th>
                     <th>Description</th>
                     <th>Actions</th>
-                    <th><a href='add-job.php'>Ajouter</a></th>
                 </tr>";
 
         // Afficher les données de chaque enregistrement
