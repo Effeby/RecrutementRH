@@ -117,16 +117,14 @@ $jobTitle = isset($_GET['job_titre']) ? urldecode($_GET['job_titre']) : 'Aucun p
     <form class="konnect-form" id="contactForm" action="process_candidature.php" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6">
-            <input type="text" class="form-control" id="poste_name" name="nom_poste" value="<?= $jobTitle ?>" disabled>
+            <input type="text" class="form-control" id="poste_name" name="nom_poste" value="<?= $jobTitle ?>" readonly>
             <input type="text" class="form-control" id="name" name="nom_prenom" placeholder="Nom & prénom" required>
             <input type="number" class="form-control" id="phone" name="contact" placeholder="Votre numéro de téléphone" required>
             <input type="email" class="form-control" id="email" name="email" placeholder="Votre email" required>
         </div>
         <div class="col-md-6">
             <textarea class="form-control" id="comment" name="message" placeholder="Ecriver vootre message" required></textarea>
-            <input type="file" name="lettre_motivation" class="form-control">
-            <br>
-            <input type="file" name="cv" class="form-control">
+            <input type="file" name="cv" class="form-control" placeholder="ajouter votre cv">
         </div>
     </div>
 
